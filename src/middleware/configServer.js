@@ -65,7 +65,7 @@ const notFoundHandler = (req, res) => {
 
 //Swagger config
 const swaggerConfig = () => {
-    const swaggerEndpoint = '/api-docs';
+    const swaggerEndpoint = '/';
     const swaggerSpec = combineSwaggerFiles();
     return [
         swaggerEndpoint,
