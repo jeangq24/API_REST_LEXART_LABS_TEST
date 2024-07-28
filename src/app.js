@@ -16,8 +16,9 @@ server.use(
 );
 
 //Routes
-server.get('/', (req, res) => {
+server.get('/', (req, res, next) => {
   res.send('Hello, World!');
+  next();
 });
 
 server.use(
