@@ -20,7 +20,13 @@ try {
   sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: msg => logger.debug(msg),
     native: false,
-    dialectModule: pg
+    dialectModule: pg,
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+      
+    }
   });
   logger.info('Connection to the database has been established successfully.');
 } catch (error) {
