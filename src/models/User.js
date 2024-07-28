@@ -4,7 +4,7 @@ const logger = require('../lib/logs');
 const bcrypt = require('bcrypt');
 const User = (sequelize) => {
     try {
-        sequelize.define('User', {
+        sequelize?.define('User', {
             id: {
                 type: INTEGER,
                 primaryKey: true,

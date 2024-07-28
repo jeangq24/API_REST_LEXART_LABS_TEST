@@ -3,7 +3,7 @@ const logger = require('../lib/logs');
 const { STRING, INTEGER, DATE } = DataTypes;
 const Person = (sequelize) => {
     try {
-        sequelize.define('Person', {
+        sequelize?.define('Person', {
             id: {
                 type: INTEGER,
                 primaryKey: true,

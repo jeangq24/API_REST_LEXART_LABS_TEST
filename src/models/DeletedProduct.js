@@ -3,7 +3,7 @@ const { INTEGER, STRING } = DataTypes
 const logger = require('../lib/logs');
 const DeletedProduct = (sequelize) => {
   try {
-    sequelize.define('DeletedProduct', {
+    sequelize?.define('DeletedProduct', {
       id: {
         type: INTEGER,
         primaryKey: true,

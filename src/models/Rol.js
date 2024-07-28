@@ -3,7 +3,7 @@ const logger = require('../lib/logs');
 const { STRING, BOOLEAN, INTEGER } = DataTypes;
 const Rol = (sequelize) => {
   try {
-    sequelize.define('Rol', {
+    sequelize?.define('Rol', {
       status: {
         type: BOOLEAN,
         allowNull: false,
