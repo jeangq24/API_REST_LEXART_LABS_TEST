@@ -10,7 +10,7 @@ const {
 const port = SERVER_PORT || 3001;
 const host = SERVER_HOST || "127.0.0.1";
 
-conn.sync({ force: false })
+conn.sync({ force: true })
   .then(() => {
     server.listen(port, host, async() => {
       logger.info(`Server is listening in: ${host}:${port}`);
