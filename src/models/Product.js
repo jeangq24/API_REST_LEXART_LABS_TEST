@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { INTEGER, STRING } = DataTypes
 const logger = require('../lib/logs');
-
-module.exports = (sequelize) => {
+const Product =  (sequelize) => {
   try {
     sequelize.define('Product', {
       id: {
@@ -81,3 +80,4 @@ module.exports = (sequelize) => {
     logger.error('Error defining Product model:', error);
   }
 };
+module.exports = Product;

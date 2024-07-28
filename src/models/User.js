@@ -1,9 +1,8 @@
 const { DataTypes } = require('sequelize');
-const {STRING, INTEGER} = DataTypes; 
+const { STRING, INTEGER } = DataTypes;
 const logger = require('../lib/logs');
 const bcrypt = require('bcrypt');
-
-module.exports = (sequelize) => {
+const User = (sequelize) => {
     try {
         sequelize.define('User', {
             id: {
@@ -12,7 +11,7 @@ module.exports = (sequelize) => {
                 autoIncrement: true,
                 allowNull: false,
                 unique: true,
-            
+
             },
             username: {
                 type: STRING,
@@ -76,3 +75,4 @@ module.exports = (sequelize) => {
         logger.error('Error defining User model:', error);
     }
 };
+module.exports = User;
