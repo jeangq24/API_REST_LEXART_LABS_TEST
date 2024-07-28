@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const logger = require('./lib/logs');
-
+const pg = require("pg");
 //Data config conexion
 const {
   DB_USER,
@@ -20,6 +20,7 @@ try {
   sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: msg => logger.debug(msg),
     native: false,
+    dialectModule: pg
   });
   logger.info('Connection to the database has been established successfully.');
 } catch (error) {
