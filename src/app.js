@@ -25,7 +25,13 @@ server.use(
 
 //Swagger route 
 const [swaggerEndpoint, swaggerServe, swaggerSetup] = swaggerConfig();
-server.use(swaggerEndpoint, swaggerServe, swaggerSetup);
+server.use(swaggerEndpoint, (req, res, next) => {
+  res.setHeader('Content-Security-Policy', `script-src 'self'`);
+  next();
+},
+swaggerServe,
+swaggerSetup,
+);
 
 //Handlers
 server.use(
