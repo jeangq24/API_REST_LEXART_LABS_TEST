@@ -16,6 +16,10 @@ server.use(
 );
 
 //Routes
+server.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
 server.use(
   '/',
   routes,

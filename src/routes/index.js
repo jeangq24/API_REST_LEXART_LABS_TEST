@@ -14,8 +14,11 @@ fs.readdirSync(routesDir)
   .forEach(file => {
     try {
       const route = require(path.join(routesDir, file));
+      console.log(route)
       const routeName = file.split('.')[0];
+      console.log(routeName)
       router.use(`/${routeName}`, route);
+      
       logger.info(`Route /${routeName} has been loaded successfully.`);
     } catch (error) {
       logger.error(`Error loading route /${file}:`, error);
