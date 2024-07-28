@@ -10,9 +10,9 @@ const {
 const port = SERVER_PORT || 3001;
 const host = SERVER_HOST || "127.0.0.1";
 
-conn.sync({ force: true })
+conn.sync({ force: false })
   .then(() => {
-    server.listen(port, host, async() => {
+    server.listen(port, async() => {
       logger.info(`Server is listening in: ${host}:${port}`);
       const existingRoles = await Rol.findAll();
       if (existingRoles.length === 0) {
