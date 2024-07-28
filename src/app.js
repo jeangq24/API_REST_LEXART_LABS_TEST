@@ -2,7 +2,7 @@
 const express = require('express');
 const routes = require('./routes/index.js');
 const { morganLogging, bodyParserUrlencoded, bodyParseJson, configCors, errorHandler, notFoundHandler, swaggerConfig } = require('./middleware/configServer.js');
-
+const path = require("path")
 
 //Init
 const server = express();
@@ -24,15 +24,19 @@ server.use(
 );
 
 //Swagger route 
-const [swaggerEndpoint, swaggerServe, swaggerSetup] = swaggerConfig();
-server.use(swaggerEndpoint, (req, res, next) => {
-  res.setHeader('Content-Security-Policy', `script-src 'self'`);
-  next();
-},
-swaggerServe,
-swaggerSetup,
+const __swaggerDistPath = path.join(
+  __dirname,
+  'node_modules',
+  'swagger-ui-dist'
 );
 
+const [swaggerEndpoint, swaggerServe, swaggerSetup] = swaggerConfig();
+
+server.use(swaggerEndpoint,
+  express.static(__swaggerDistPath, { index: false }), 
+  swaggerServe,
+  swaggerSetup
+);
 //Handlers
 server.use(
   notFoundHandler,
