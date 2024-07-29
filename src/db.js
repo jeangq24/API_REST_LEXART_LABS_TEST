@@ -11,6 +11,7 @@ const {
   DB_PASSWORD,
   DB_HOST,
   DB_NAME,
+  ENV_DEV
 } = process.env;
 
 let sequelize;
@@ -21,7 +22,7 @@ try {
     logging: msg => logger.debug(msg),
     native: false,
     dialectModule: pg,
-    dialectOptions: {
+    dialectOptions: ENV_DEV ? null : {
       ssl: {
         rejectUnauthorized: false,
       },
