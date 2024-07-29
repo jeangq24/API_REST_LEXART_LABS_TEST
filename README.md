@@ -97,5 +97,3 @@ Se intentó integrar la API REST a Vercel, lo cual generó inconvenientes con lo
 ## Comentarios Adicionales
 
 Si tienes algún problema o pregunta sobre la configuración o el uso del proyecto, no dudes en abrir un issue o contactarnos.
-
-¡Gracias por utilizar nuestra API REST!
