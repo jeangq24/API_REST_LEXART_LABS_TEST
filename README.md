@@ -1,7 +1,5 @@
 # API_REST_LEXART_LABS_TEST
-REST API DEVELOPED BY JEAN GARZON
-
-
+REST API DEVELOPMENT BY JEAN GARZON
 
 # REST API con Node.js, Express, Sequelize y PostgreSQL
 
@@ -47,11 +45,43 @@ El servidor se ejecutará en el puerto `3001`. Verifica la consola para confirma
 
 Los logs se registrarán en un archivo llamado `combined.log` en la carpeta `RAIZ`.
 
+## Características del API
+
+### Encriptación de Contraseñas
+
+El API utiliza bcrypt para encriptar las contraseñas antes de almacenarlas en la base de datos, asegurando así la seguridad de los datos sensibles.
+
+### Autenticación con Tokens
+
+La autenticación se maneja mediante tokens JWT (JSON Web Tokens). Al consumir endpoints protegidos, es necesario proporcionar un token válido en los encabezados de las solicitudes.
+
+### Manejador de Errores
+
+El API incluye un manejador de errores centralizado que captura y gestiona las excepciones, proporcionando respuestas claras y coherentes al cliente.
+
+### Manejador de Rutas No Encontradas
+
+Las rutas no definidas en el API son gestionadas por un middleware específico que retorna un error 404, indicando que la ruta no ha sido encontrada.
+
+### Registro de Logs
+
+El sistema de registro de logs guarda información detallada de las operaciones del servidor, incluyendo:
+
+- Tipo de log (info, error, etc.)
+- Contenido del log
+- Fecha y hora del log
+
+Estos logs se almacenan en el archivo `combined.log` en la carpeta `API`.
+
+### Validaciones
+
+Las validaciones se implementan tanto en la definición de modelos como en las solicitudes (requests) disponibles. Esto garantiza la integridad y consistencia de los datos que se manejan.
+
 ## Documentación de la API
 
 El servidor expone un endpoint exclusivo para visualizar la documentación realizada con Swagger, la cual define los endpoints disponibles y el modelado de la base de datos. La documentación se encuentra en la ruta:
 
-- Desarrollo: [http://localhost:3001](http://localhost:3001/)
+- Desarrollo: [http://localhost:3001](http://localhost:3001)
 - Producción: [https://api-rest-lexart-labs-test.onrender.com/](https://api-rest-lexart-labs-test.onrender.com/)
 
 ## Despliegue
@@ -67,3 +97,5 @@ Se intentó integrar la API REST a Vercel, lo cual generó inconvenientes con lo
 ## Comentarios Adicionales
 
 Si tienes algún problema o pregunta sobre la configuración o el uso del proyecto, no dudes en abrir un issue o contactarnos.
+
+¡Gracias por utilizar nuestra API REST!
