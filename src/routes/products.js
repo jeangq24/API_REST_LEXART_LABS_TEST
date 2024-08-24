@@ -3,7 +3,7 @@ const router = Router();
 const logger = require('../lib/logs');
 const { Product, DeletedProduct } = require('../db.js');
 const authenticateToken = require('../middleware/authenticateToken.js');
-
+const emitProductList = require("../lib/emitProductList.js");
 
 router.post('/', authenticateToken, async (req, res) => {
     try {
@@ -26,9 +26,10 @@ router.post('/', authenticateToken, async (req, res) => {
                 status: 400
             });
         }
-        const createdProduct = await Product.create({product: {name, lot_number, price, stock, entry_date,}, status: 200 });
-        logger.info('Successfully created product')
-        res.status(200).json(createdProduct);
+        const createdProduct = await Product.create({name, lot_number, price, stock, entry_date});
+        logger.info('Successfully created product');
+        await emitProductList();
+        res.status(200).json({message:'Successfully created product', product: createdProduct, status: 200 });
 
     } catch (error) {
 
@@ -43,6 +44,7 @@ router.post('/bulk', authenticateToken, async (req, res) => {
         const listProducts = require("../lib/listFakeProducts.js");
         await Product.bulkCreate(listProducts);
         logger.info('Successfully loaded 50 products');
+        await emitProductList();
         res.status(200).json({ message: 'Products successfully loaded', status: 200 });
     } catch (error) {
         logger.error(`Error: ${error}`);
@@ -51,9 +53,11 @@ router.post('/bulk', authenticateToken, async (req, res) => {
 });
 
 
+
+
 router.get('/', authenticateToken, async (req, res) => {
     try {
-        const productsList = await Product.findAll();
+        const productsList = await emitProductList();    
         res.status(200).json({ productsList: [...productsList], status: 200 });
     } catch (error) {
         logger.error(`Error: ${error}`);
@@ -72,7 +76,7 @@ router.put('/:id', authenticateToken, async (req, res) => {
             return res.status(400).json({ error: messageError, status: 400 });
 
         };
-
+        await emitProductList();
         const product = await Product.findByPk(id);
 
         if (!product) {
@@ -125,7 +129,8 @@ router.delete('/:id', authenticateToken, async (req, res) => {
 
         await DeletedProduct.create(deletedProductData);
         await product.destroy();
-        logger.error("Product deleted successfully and history saved");
+        logger.info("Product deleted successfully and history saved");
+        await emitProductList();
         return res.status(200).json({ message: 'Product deleted successfully and history saved', status: 200 });
 
     } catch (error) {
@@ -156,6 +161,7 @@ router.delete('/delete/all', authenticateToken, async (req, res) => {
         await Product.destroy({ where: {}, truncate: false });
 
         logger.info('All products successfully deleted and history saved');
+        await emitProductList();
         return res.status(200).json({ message: 'All products successfully deleted and history saved', status: 200 });
     } catch (error) {
         logger.error(`Error: ${error}`);

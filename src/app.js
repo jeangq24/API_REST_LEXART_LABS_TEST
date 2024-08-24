@@ -2,10 +2,14 @@
 const express = require('express');
 const routes = require('./routes/index.js');
 const { morganLogging, bodyParserUrlencoded, bodyParseJson, configCors, errorHandler, notFoundHandler, swaggerConfig } = require('./middleware/configServer.js');
-
+const { createServer } = require('node:http');
+const {initializeSockets} = require("./lib/socket.js");
 //Init
 const server = express();
-server.name = 'API';
+const socketServer = createServer(server);
+initializeSockets(socketServer);
+
+server.name = 'API-REST';
 
 //Config
 server.use(
@@ -19,6 +23,7 @@ server.use(
   '/',
   routes,
 );
+
 
 //Swagger route 
 const [swaggerEndpoint, swaggerServe, swaggerSetup] = swaggerConfig();
@@ -35,4 +40,4 @@ server.use(
 );
 
 //Modules exports
-module.exports = server;
+module.exports = {server, socketServer};

@@ -36,7 +36,7 @@ const combineSwaggerFiles = () => {
             },
             servers: [
                 {
-                    url: (SERVER_HOST && SERVER_PORT) ? SERVER_HOST+":"+SERVER_PORT : "http://localhost:3001",
+                    url: SERVER_HOST || "http://localhost:3001",
                     description: 'Developer API REST'
                 }
             ],

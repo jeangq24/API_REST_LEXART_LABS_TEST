@@ -1,4 +1,4 @@
-const server = require('./src/app.js');
+const {server, socketServer} = require('./src/app.js');
 const { conn, Rol } = require('./src/db.js');
 const logger = require('./src/lib/logs.js');
 
@@ -12,7 +12,7 @@ const host = SERVER_HOST || "127.0.0.1";
 
 conn.sync({ force: false })
   .then(() => {
-    server.listen(port, async() => {
+    socketServer.listen(port, async() => {
       logger.info(`Server is listening in: ${host}:${port}`);
       const existingRoles = await Rol.findAll();
       if (existingRoles.length === 0) {
@@ -33,3 +33,5 @@ conn.sync({ force: false })
   .catch(err => {
     logger.error('Error syncing models or starting server:', err);
   });
+
+ 

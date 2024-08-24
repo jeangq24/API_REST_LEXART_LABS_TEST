@@ -90,10 +90,6 @@ Actualmente, el proyecto se encuentra desplegado en [Render](https://render.com)
 
 - Host: [https://api-rest-lexart-labs-test.onrender.com/](https://api-rest-lexart-labs-test.onrender.com/)
 
-### Nota sobre Vercel
-
-Se intentó integrar la API REST a Vercel, lo cual generó inconvenientes con los módulos `swagger-ui-express` y `swagger-jsdoc`, además de problemas para cargar las rutas. Por esta razón, se optó por subir el proyecto en otro servicio.
-
 ## Comentarios Adicionales
 
 Si tienes algún problema o pregunta sobre la configuración o el uso del proyecto, no dudes en abrir un issue o contactarnos.
