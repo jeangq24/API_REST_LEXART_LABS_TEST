@@ -5,7 +5,7 @@ const logger = require('../lib/logs.js');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const combineSwaggerFiles = require('../lib/combineSwaggerFiles.js');
-
+const {client_host} = require("../lib/getHosts.js")
 // Middleware logging
 const morganLogging = morgan('dev', {
     stream: {
@@ -22,7 +22,7 @@ const parserCookie = cookieParser();
 
 // Config de CORS
 const configCors = (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', `${client_host}`);
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');

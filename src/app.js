@@ -40,4 +40,4 @@ server.use(
 );
 
 //Modules exports
-module.exports = {server, socketServer};
+module.exports = {socketServer};

@@ -1,19 +1,12 @@
-const {server, socketServer} = require('./src/app.js');
+const { socketServer} = require('./src/app.js');
 const { conn, Rol } = require('./src/db.js');
 const logger = require('./src/lib/logs.js');
-
-const {
-  SERVER_PORT,
-  SERVER_HOST,
-} = process.env;
-
-const port = SERVER_PORT || 3001;
-const host = SERVER_HOST || "127.0.0.1";
+const {server_host, server_port} = require("./src/lib/getHosts.js");
 
 conn.sync({ force: false })
   .then(() => {
-    socketServer.listen(port, async() => {
-      logger.info(`Server is listening in: ${host}:${port}`);
+    socketServer.listen(server_port, async() => {
+      logger.info(`Server is listening in: ${server_host}`);
       const existingRoles = await Rol.findAll();
       if (existingRoles.length === 0) {
 

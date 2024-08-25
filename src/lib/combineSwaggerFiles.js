@@ -1,9 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const {
-    SERVER_PORT,
-    SERVER_HOST,
-  } = process.env;
+const {server_port, server_host} = require("./getHosts.js");
 
 const readJSONFiles = (directory) => {
     const files = fs.readdirSync(directory);
@@ -36,7 +33,7 @@ const combineSwaggerFiles = () => {
             },
             servers: [
                 {
-                    url: SERVER_HOST || "http://localhost:3001",
+                    url: `${server_host}:${server_port}`,
                     description: 'Developer API REST'
                 }
             ],

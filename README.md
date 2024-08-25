@@ -20,11 +20,14 @@ npm install
 Crea un archivo `.env` en la raíz del proyecto y define las siguientes variables de entorno:
 
 ```env
-DB_USER=postgres # usuario del servidor postgres
-DB_PASSWORD=postgres # contraseña del usuario postgres
-DB_HOST=localhost # host de la conexión
-DB_NAME=shoptest # nombre de la base de datos
+DB_USER=postgres # usuario del servidor postgres *
+DB_PASSWORD=postgres # contraseña del usuario postgres *
+DB_HOST=localhost # host de la conexión *
+DB_NAME=shoptest # nombre de la base de datos *
 ENV_DEV=true # configuración del modo desarrollo en true
+CLIENT_HOST=http://localhost:3000 # cliente host (valida la conexion de cors, en caso de no especificar queda abierto a todos los dominios)
+SERVER_PORT=3001 # servidor puerto (en caso de no pasar por defecto sera el puerto 3001)
+SERVER_HOST=http://localhost:3001  # servidor host
 ```
 
 Estas variables son por defecto y pueden ajustarse según tu configuración.
