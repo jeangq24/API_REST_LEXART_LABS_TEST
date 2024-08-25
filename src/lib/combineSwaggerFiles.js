@@ -33,7 +33,7 @@ const combineSwaggerFiles = () => {
             },
             servers: [
                 {
-                    url: `${server_host}:${server_port}`,
+                    url: `${server_host}`,
                     description: 'Developer API REST'
                 }
             ],
