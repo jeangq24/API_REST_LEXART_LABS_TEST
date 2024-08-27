@@ -2,14 +2,9 @@
     "/deleted-products": {
         "get": {
             "summary": "Get all deleted products",
-            "description": "Retrieves a list of all deleted products.",
+            "description": "Retrieves a list of all deleted products. The authentication token is expected to be present in an HTTP-only cookie named 'token'.",
             "tags": [
                 "Deleted Products"
-            ],
-            "security": [
-                {
-                    "bearerAuth": []
-                }
             ],
             "responses": {
                 "200": {
@@ -66,14 +61,9 @@
     "/products/{id}": {
         "put": {
             "summary": "Update a product",
-            "description": "Updates the specified product.",
+            "description": "Updates the specified product. The authentication token is expected to be present in an HTTP-only cookie named 'token'.",
             "tags": [
                 "Products"
-            ],
-            "security": [
-                {
-                    "bearerAuth": []
-                }
             ],
             "parameters": [
                 {
@@ -201,14 +191,9 @@
         },
         "delete": {
             "summary": "Delete a product",
-            "description": "Deletes the specified product.",
+            "description": "Deletes the specified product. The authentication token is expected to be present in an HTTP-only cookie named 'token'.",
             "tags": [
                 "Products"
-            ],
-            "security": [
-                {
-                    "bearerAuth": []
-                }
             ],
             "parameters": [
                 {
@@ -312,13 +297,9 @@
     "/products/bulk": {
         "post": {
             "summary": "Load 50 products",
+            "description" : "Load 50 products. The authentication token is expected to be present in an HTTP-only cookie named 'token'.",
             "tags": [
                 "Products"
-            ],
-            "security": [
-                {
-                    "bearerAuth": []
-                }
             ],
             "responses": {
                 "200": {
@@ -386,14 +367,9 @@
     },
     "/products/delete-all": {
         "delete": {
-            "summary": "Delete all products and save a history of deleted products",
+            "summary": "Delete all products and save a history of deleted products. The authentication token is expected to be present in an HTTP-only cookie named 'token'.",
             "tags": [
                 "Products"
-            ],
-            "security": [
-                {
-                    "bearerAuth": []
-                }
             ],
             "responses": {
                 "200": {
