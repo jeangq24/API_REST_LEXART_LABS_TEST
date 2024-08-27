@@ -143,7 +143,6 @@ router.delete('/:id', authenticateToken, async (req, res) => {
 router.delete('/delete/all', authenticateToken, async (req, res) => {
     try {
         const products = await Product.findAll();
-        console.log(products)
         if (products.length === 0) {
             return res.status(200).json({ message: 'No products to delete', status: 200 });
         }

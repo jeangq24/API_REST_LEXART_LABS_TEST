@@ -5,7 +5,7 @@ const logger = require('../lib/logs');
 const { User } = require('../db');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
-
+const authenticateToken = require("../middleware/authenticateToken");
 /**
  * @api {post} /auth Request login
  * @apiName PostAuth
@@ -50,11 +50,17 @@ router.post('/', async (req, res) => {
         };
 
         const token = jwt.sign({ id: user.id, username: user.username, email: user.email, rol: user.RolId }, SECRET_KEY, { expiresIn: '24h' });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.ENV_DEV ? false : true,
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000,
+        });
+
+        const { id, username, personId } = user;
         infoString = 'Login completed'
         logger.info(infoString);
-        const { id, username, personId } = user;
         return res.status(200).json({
-            token,
             user: {
                 id,
                 email: user.email,
@@ -68,12 +74,55 @@ router.post('/', async (req, res) => {
     } catch (error) {
 
         logger.error(`Error: ${error}`);
-        return res.status(500).json({ 
+        return res.status(500).json({
             error: 'Internal server error',
             status: 500
-         });
+        });
     }
 });
 
+/**
+ * @api {get} /auth/check-session' Request Check Session 
+ * @apiName GetAuthCheckSession
+ * @apiGroup Auth
+ * 
+ * @apiSuccess {JSON} Object user.
+ */
+router.get('/check-session', authenticateToken, (req, res) => {
+    try {
+        res.status(200).json({message: "Authenticated", user: req.user });
+        return;
+        
+    } catch (error) {
+        logger.error(`Error: ${error}`);
+        return res.status(500).json({
+            error: 'Internal server error',
+            status: 500
+        });
+    }
+});
+/**
+ * @api {post} /auth/logout Request log Out session
+ * @apiName PostAuthLogOut
+ * @apiGroup Auth
+ *
+ * @apiSuccess {JSON} Object message and status.
+ */
+router.post('/logout', authenticateToken, (req, res) => {
+    try {
+        res.cookie('token', '', { expires: new Date(0), httpOnly: true, secure: process.env.ENV_DEV ? false : true });
+        logger.info("Logged out");
+        res.status(200).json({ message: 'Logged out', status: 200 });
+
+        return;
+    } catch (error) {
+        logger.error(`Error: ${error}`);
+        return res.status(500).json({
+            error: 'Internal server error',
+            status: 500
+        });
+    }
+
+});
 
 module.exports = router;

@@ -1,7 +1,7 @@
 //Imports required
 const express = require('express');
 const routes = require('./routes/index.js');
-const { morganLogging, bodyParserUrlencoded, bodyParseJson, configCors, errorHandler, notFoundHandler, swaggerConfig } = require('./middleware/configServer.js');
+const { morganLogging, bodyParserUrlencoded, bodyParseJson, configCors, errorHandler, notFoundHandler, swaggerConfig, parserCookie } = require('./middleware/configServer.js');
 const { createServer } = require('node:http');
 const {initializeSockets} = require("./lib/socket.js");
 //Init
@@ -17,6 +17,7 @@ server.use(
   bodyParserUrlencoded,
   bodyParseJson,
   configCors,
+  parserCookie
 );
 
 server.use(
