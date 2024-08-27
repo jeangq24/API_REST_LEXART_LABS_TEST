@@ -28,6 +28,7 @@ ENV_DEV=true # configuración del modo desarrollo en true
 CLIENT_HOST=http://localhost:3000 # cliente host (valida la conexion de cors, en caso de no especificar queda abierto a todos los dominios)
 SERVER_PORT=3001 # servidor puerto (en caso de no pasar por defecto sera el puerto 3001)
 SERVER_HOST=http://localhost:3001  # servidor host
+SECRET_KEY=your_secret_key #clave secreta para gestionar JWT (en caso de no especificar toma un valor por defecto)
 ```
 
 Estas variables son por defecto y pueden ajustarse según tu configuración.
@@ -54,9 +55,9 @@ Los logs se registrarán en un archivo llamado `combined.log` en la carpeta `RAI
 
 El API utiliza bcrypt para encriptar las contraseñas antes de almacenarlas en la base de datos, asegurando así la seguridad de los datos sensibles.
 
-### Autenticación con Tokens
+### Autenticación con Cookie Http Only
 
-La autenticación se maneja mediante tokens JWT (JSON Web Tokens). Al consumir endpoints protegidos, es necesario proporcionar un token válido en los encabezados de las solicitudes.
+La autenticación se maneja mediante tokens JWT (JSON Web Tokens). Para acceder a los endpoints protegidos, es necesario que el cliente proporcione una cookie Http Only llamada "token". Esta cookie debe ser enviada automáticamente por el navegador en cada solicitud para validar el acceso al recurso.
 
 ### Manejador de Errores
 
