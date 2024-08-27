@@ -55,6 +55,7 @@ router.post('/', async (req, res) => {
             secure: process.env.ENV_DEV ? false : true,
             sameSite: process.env.ENV_DEV ? 'Lax' : 'None',
             maxAge: 24 * 60 * 60 * 1000,
+            partitioned: process.env.ENV_DEV ? false : true,
         });
 
         const { id, username, personId } = user;
